@@ -1,0 +1,17 @@
+{
+  "name": "lol_quizzer",
+  "version": "1.0.0",
+  "description": "Bot de discord que realiza quizzes en español sobre League Of Legends",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Incarnate #LAS",
+  "license": "ISC",
+  "dependencies": {
+    "core-utils": "0.0.4",
+    "discord.js": "^12.4.1",
+    "mysql": "^2.18.1",
+    "safe-buffer": "^5.2.1"
+  }
+}
