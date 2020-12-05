@@ -16,7 +16,6 @@ module.exports = {
         } else {
             message.channel.send("¡La próxima vez intenta responder algo!")
         }
-
     }
 }
 

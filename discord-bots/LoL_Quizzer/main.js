@@ -1,5 +1,6 @@
 const Discord = require('discord.js');
 const fs = require('fs');
+const mysql = require('mysql');
 
 const client = new Discord.Client();
 client.commands = new Discord.Collection();
@@ -21,6 +22,33 @@ const quizz_en_curso = {
     display_names: [],
     tiempo: []
 };
+
+function getGeneralId(guild) 
+    {
+    try{
+    let channels = guild.channels.cache.array();
+    for (const channel of channels) 
+    {
+        if (channel.name.includes("general")){
+            return channel.id;
+        }
+
+    }}catch(err){
+        console.log('error')
+        console.log(err)
+    }
+
+    return "";
+}
+
+client.on('guildCreate', newGuild => {
+    generalId = getGeneralId(newGuild);
+    client.channels.fetch(generalId).then( channel => {
+        channel.send('Atención mortales, yo, El SabeLoL Todo, he llegado a su servidor para desafiarlos en un duelo de ingenio.\n' +
+        'Utilicen el comando "-lore" si quieren conocerme, o utilicen "-help" si necesitan ayuda. Invito a los valientes a utilizar "-quizz" ' +
+        'si quieren desafiarme.');
+    });
+});
 
 client.on('message', message =>{
     if (!message.content.startsWith(prefix) || message.author.bot) return;
@@ -82,6 +110,8 @@ client.on('message', message =>{
     } else if (command == 'creditos'){
         client.commands.get('creditos').execute(message, args);
 
+    } else if (command == 'lore'){
+        client.commands.get('lore').execute(message, args);
     }
 });
 
@@ -103,6 +133,39 @@ function cancelarParticipacion(message, timeout){
         message.channel.send("La pregunta de " + message.member.displayName + " ha sido cancelada por inactividad." + 
         "\n¡Mejor estar atento la próxima vez!");
     }
+
+    con = mysql.createConnection({
+        host:  "localhost",
+        user: "conector",
+        password: "conector123",
+        database: "lol_quizzer"
+    });
+
+    con.query("INSERT INTO usuario(discord_user, puntaje_total, preguntas_respondidas, respuestas_correctas)" + 
+    " VALUES('" + message.member.user.username + "', " + 0 + ", " + 1 + ", " + 0 + ");",
+    function (err2, result2, fields2){
+
+        if (err2) {
+            con.query("SELECT puntaje_total, preguntas_respondidas, respuestas_correctas FROM usuario WHERE discord_user = '" + message.member.user.username + "'",
+            function (err3, result3, fields3){
+                if (err3) throw err3;
+
+                console.log("[UPDATE] Preguntas respondidas: " + result3[0].preguntas_respondidas);
+
+                var preguntas_respondidas = result3[0].preguntas_respondidas + 1;
+                    
+                con.query("UPDATE usuario SET preguntas_respondidas = " + preguntas_respondidas + 
+                " WHERE discord_user = '" + message.member.user.username + "'", function (err4, result4, fields4){
+                    if (err4) throw err4;
+                    console.log("Datos de " + message.member.user.username + " actualizados exitosamente.");
+                });
+            });
+
+        } else {
+            console.log("Datos de " + message.member.user.username + " insertados exitosamente.");
+        }
+    });
+
 }
 
 

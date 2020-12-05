@@ -32,9 +32,11 @@ function mostrarPregunta(mensaje, con){
                 console.log("Archivo: " + file_name + " // idPregunta: " + idPregunta);
             });
     
-            con.query("SELECT letra FROM pregunta WHERE idPregunta = " + idPregunta + ";", function (err3, result3, fields3) {
+            con.query("SELECT letra, img_link FROM pregunta WHERE idPregunta = " + idPregunta + ";", function (err3, result3, fields3) {
                     if (err3) throw err3;
-                
+                    if (result3[0].img_link != null){
+                        mensaje.channel.send({files: [result3[0].img_link]});
+                    }
                     mensaje.channel.send(result3[0].letra + '\n*¡Recuerda utilizar el formato "-respuesta TU RESPUESTA" para responder!*').then(
                     message => setTimeout(function eliminar(msj_pregunta){
                         msj_pregunta.delete();

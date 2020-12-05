@@ -8,8 +8,9 @@ module.exports = {
         const quizz = '**-quizz:** *Inicia una quizz/trivia de League of Legends. El bot realizará una pregunta dirigida al usuario que envió el mensaje.*\n';
         const respuesta = '**-respuesta:** *Utilizado para responder a la pregunta de una quizz. Utiliza el formato "-respuesta TU RESPUESTA".*\n';
         const stats = '**-stats:** *Muestra tus estadísticas en el juego de quizzes de League of Legends.*\n';
-        const cancelar = '**-cancelar:** *Cancela la pregunta que te hizo el bot anteriormente. Hacer esto suma a tus preguntas respondidas.\n*';
-        const creditos = '**-creditos:** *Muestra los usuarios de discord de las personas involucradas en la creación de este bot.\n*'
+        const cancelar = '**-cancelar:** *Cancela la pregunta que te hizo el bot anteriormente. Hacer esto suma a tus preguntas respondidas.*\n';
+        const creditos = '**-creditos:** *Muestra los usuarios de discord de las personas involucradas en la creación de este bot.*\n'
+        const lore = '**-lore:** *Utiliza este comando para leer la emocionante y sorprendente historia de El SabeLoL Todo.*\n'
 
         if (args.length < 1){
             message.channel.send('Los comandos disponibles actualmente son:\n\n'+
@@ -19,7 +20,8 @@ module.exports = {
             respuesta +
             stats +
             cancelar +
-            creditos);
+            creditos +
+            lore);
 
         } else {
             var texto_a_mostrar = "Ayuda: \n\n";
@@ -55,6 +57,10 @@ module.exports = {
 
                     case 'creditos':
                         texto_a_mostrar += creditos;
+                    continue;
+
+                    case 'lore':
+                        texto_a_mostrar += lore;
                     continue;
 
                     default:
