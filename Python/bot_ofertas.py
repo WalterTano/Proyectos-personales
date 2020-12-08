@@ -1,24 +1,22 @@
 from selenium import webdriver
-from datetime import date, timedelta
+from datetime import date
 import pymysql.cursors
 import smtplib
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 
-conector = pymysql.connect(user='walter', 
-        password='54616473', 
-        database='Personal', 
+conector = pymysql.connect(user='XXXXX', 
+        password='XXXXXXX', 
+        database='XXXXXXX', 
         host='127.0.0.1')
-        #cursorclass=pymysql.cursors.DictCursor)
 
 cursor = conector.cursor()
-#eliminador = conector.cursor()
-mail_correo = 'autoemailwalter@gmail.com'
-pass_mail = 'autoemailwalter'
-destino = 'tano.walter@hotmail.com'
+mail_correo = 'XXXXXXXXX@XXXXX.XX'
+pass_mail = 'XXXXXXXXXXXX'
+destino = 'XXXXXXXXX@XXXXX.XX'
 
 def buscar_ofertas(link, xPath):
-    driver = webdriver.Chrome("/home/walter/Chromedriver/chromedriver")
+    driver = webdriver.Chrome('E:\\Scripts Python\\chromedriver.exe')
     driver.get(link)
     ofertas = []
     contador = 0
@@ -46,27 +44,6 @@ def guardar_ofertas(ofertas):
             continue
     
     conector.commit()
-
-
-def eliminar_duplicadas():
-    fecha_hoy = date.today()
-    sql = "SELECT URL FROM Ofertas"
-    cursor.execute(sql)
-    contador = 0
-    for x in cursor:
-        for y in cursor:
-            if x == y and contador < 2:
-                contador += 1
-                if contador == 2:
-                    val = (y, fecha_hoy)
-                    eliminador.execute("DELETE FROM Ofertas WHERE URL = %s AND fecha = %s", val)
-                    conector3.commit()
-                    eliminar_duplicadas()
-
-
-        break
-
-    return "Guardado finalizado."
 
 
 def mail_ofertas():
@@ -114,5 +91,4 @@ xPath_buscojobs = '/html/body/div[4]/div[2]/div/div[5]/div[2]/div[{}]/div[1]/div
 ofertas = buscar_ofertas(link_buscojobs, xPath_buscojobs)
 guardar_ofertas(ofertas)
 
-#print(eliminar_duplicadas())
 mail_ofertas()

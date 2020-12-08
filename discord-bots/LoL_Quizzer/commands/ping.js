@@ -2,6 +2,7 @@ module.exports = {
     name: 'ping',
     description: 'pings to test bot.',
     execute(message, args){
-        message.channel.send('pong!');
+        //var prueba = message.channel.guild.members.cache.array('Snowflake');
+        message.channel.send("pong! ");//+ prueba[2]);
     }
 }

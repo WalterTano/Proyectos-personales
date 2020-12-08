@@ -18,8 +18,8 @@ function sacarEstadisticas(message, con){
     var username = message.member.user.username;
     con.connect(function(err) {
         if (err) throw err;
-        con.query("SELECT puntaje_total, preguntas_respondidas, respuestas_correctas FROM usuario WHERE discord_user = '" +
-        username + "';", function (err2, result2, fields2){
+        con.query("SELECT puntaje_total, preguntas_respondidas, respuestas_correctas FROM usuario WHERE discord_user = " +
+        con.escape(username) + ";", function (err2, result2, fields2){
             if (err2) throw err2;
             if(result2.length > 0){
                 message.channel.send("Las estadísticas de **" + username + "** son:\n\n" +
