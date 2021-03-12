@@ -1,0 +1,1 @@
+Este es un traductor simple de texto a morse que creé mientras aprendía Python.

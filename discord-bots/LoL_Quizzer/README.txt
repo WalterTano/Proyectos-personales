@@ -1,0 +1,6 @@
+Este es un chatbot que cree por diversión.
+
+Lo cree utilizando la API de Discord (Discord.js) que funciona en Node.js. Nunca antes había programado en JavaScript (aunque si en Java y C#) y fui totalmente autodidacta para este proyecto, por lo que la calidad del código puede no ser muy buena. Además, es posible que esté muy poco comentado, ya que no era un proyecto en el que planeaba trabajar durante un periodo de tiempo extendido.
+
+Se trata de un bot de trivia. Tiene como funcionalidad realizar preguntas relacionadas a un tema (en este caso elegí un popular juego MOBA) y asignarle una puntuación a los usuarios según su proximidad a la respuesta correcta.
+Tiene otras funcionalidades, tales como mostrar un Top de jugadores según su puntaje (dicho top puede filtrarse entre general o del servidor o Guild actual), donde los usuarios además pueden buscarse para conocer su posición en el mismo. Además puede dar pistas, explicar una historia ficticia sobre su creación, cambiar su prefijo con el cual se utiliza en el chat, mostrar créditos de los participantes en su creación, mostrar una lista de comandos y su explicación y mostrar las estadísticas específicas del usuario que lo pida.

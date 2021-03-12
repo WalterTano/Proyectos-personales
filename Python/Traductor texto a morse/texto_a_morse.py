@@ -32,6 +32,8 @@ letras = {
     "!": "-.-.--"
 }
 
+# Método para obtener la clave del diccionario con su valor
+# (generalmente se busca obtener el valor con el nombre de la clave).
 def get_key(val): 
     for key, value in letras.items(): 
          if val == value: 
